@@ -78,22 +78,17 @@ $(document).ready(function() {
 
     $('#functionForm').submit(function(e) {
         e.preventDefault();
+        $('.api-response').remove(); // Remove previous responses
         $('.functionInput').each(function() {
             const functionData = $(this).val();
-            const functionName = $(this).attr('name');
+            const functionName = $(this).attr('id');
             
-            $.ajax({
-                url: 'http://127.0.0.1:8000/', // Replace with your actual endpoint URL
-                type: 'POST',
-                data: { functionName: functionName, functionData: functionData },
-                success: function(response) {
-                    const responseElement = $('<div class="api-response"></div>').text('API Endpoint: ' + response);
-                    $('#' + functionName).parent().append(responseElement);
-                },
-                error: function(xhr, status, error) {
-                    console.error("Error: " + status + " " + error);
-                }
-            });
+            // Generate a dummy API endpoint
+            const dummyEndpoint = 'http://dummyapi.com/' + functionName;
+            
+            // Display the dummy endpoint
+            const responseElement = $('<div class="api-response"></div>').text('API Endpoint: ' + dummyEndpoint);
+            $(this).parent().append(responseElement);
         });
     });
 });
